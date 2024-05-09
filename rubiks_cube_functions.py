@@ -7,12 +7,12 @@ class Cube():
     def __init__(self, front = ["g", "g", "g", "g", "g", "g", "g", "g", "g"], left = ["o", "o", "o", "o", "o", "o", "o", "o", "o"], 
                 right = ["r", "r", "r", "r", "r", "r", "r", "r", "r"], back = ["b", "b", "b", "b", "b", "b", "b", "b", "b"], 
                 top = ["w", "w", "w", "w", "w", "w", "w", "w", "w"], bottom = ["y", "y", "y", "y", "y", "y", "y", "y", "y"]):
-        self.frontColors = front
-        self.leftColors = left
-        self.rightColors = right
-        self.backColors = back
-        self.topColors = top
-        self.bottomColors = bottom
+        self.frontColors = front.copy()
+        self.leftColors = left.copy()
+        self.rightColors = right.copy()
+        self.backColors = back.copy()
+        self.topColors = top.copy()
+        self.bottomColors = bottom.copy()
         
         self.turns = {"r":self.r,"r'":self.rPrime,"r2":self.r2,"l":self.l,"l'":self.lPrime,"l2":self.l2,"f":self.f,"f'":self.fPrime,"f2":self.f2,"b":self.b,"b'":self.bPrime,"b2":self.b2,
                 "u":self.u,"u'":self.uPrime,"u2":self.u2,"d":self.d,"d'":self.dPrime,"d2":self.d2}
@@ -20,7 +20,7 @@ class Cube():
     def printCube(self):
         printColors = {"g":Back.GREEN + " " + Back.RESET, "o":Back.YELLOW + " " + Back.RESET, "r":Back.RED + " " + Back.RESET,
                 "b":Back.BLUE + " " + Back.RESET, "w":Back.WHITE + " " + Back.RESET, "y":Fore.YELLOW + Back.YELLOW + Style.BRIGHT + 
-                "Y" + Back.RESET + Style.RESET_ALL + Fore.RESET, " ":" ", "X":"X"}
+                "Y" + Back.RESET + Style.RESET_ALL + Fore.RESET, " ":" ", "X":"X", "x":"x"}
         
         print("       [" + printColors[self.backColors[0]] + " " + printColors[self.backColors[1]] + " " + printColors[self.backColors[2]] + "]")
         print("       [" + printColors[self.backColors[3]] + " " + printColors[self.backColors[4]] + " " + printColors[self.backColors[5]] + "]")
@@ -276,13 +276,13 @@ class Cube():
         self.leftColors[1] = oldTopColors[1]
         self.leftColors[2] = oldTopColors[2]
         
-        self.bottomColors[6] = oldLeftColors[0]
+        self.bottomColors[6] = oldLeftColors[2]
         self.bottomColors[7] = oldLeftColors[1]
-        self.bottomColors[8] = oldLeftColors[2]
+        self.bottomColors[8] = oldLeftColors[0]
         
-        self.rightColors[0] = oldBottomColors[6]
+        self.rightColors[0] = oldBottomColors[8]
         self.rightColors[1] = oldBottomColors[7]
-        self.rightColors[2] = oldBottomColors[8]
+        self.rightColors[2] = oldBottomColors[6]
     
     def bPrime(self):
         
@@ -305,13 +305,13 @@ class Cube():
         self.topColors[1] = oldLeftColors[1]
         self.topColors[2] = oldLeftColors[2]
         
-        self.leftColors[0] = oldBottomColors[6]
+        self.leftColors[0] = oldBottomColors[8]
         self.leftColors[1] = oldBottomColors[7]
-        self.leftColors[2] = oldBottomColors[8]
+        self.leftColors[2] = oldBottomColors[6]
         
-        self.bottomColors[6] = oldRightColors[0]
+        self.bottomColors[6] = oldRightColors[2]
         self.bottomColors[7] = oldRightColors[1]
-        self.bottomColors[8] = oldRightColors[2]
+        self.bottomColors[8] = oldRightColors[0]
         
         self.rightColors[0] = oldTopColors[0]
         self.rightColors[1] = oldTopColors[1]
@@ -338,17 +338,17 @@ class Cube():
         self.topColors[7] = oldTopColors[5]
         self.topColors[8] = oldTopColors[2]
         
-        self.frontColors[0] = oldRightColors[0]
+        self.frontColors[0] = oldRightColors[6]
         self.frontColors[1] = oldRightColors[3]
-        self.frontColors[2] = oldRightColors[6]
+        self.frontColors[2] = oldRightColors[0]
         
         self.leftColors[2] = oldFrontColors[0]
         self.leftColors[5] = oldFrontColors[1]
         self.leftColors[8] = oldFrontColors[2]
         
-        self.backColors[6] = oldLeftColors[2]
+        self.backColors[6] = oldLeftColors[8]
         self.backColors[7] = oldLeftColors[5]
-        self.backColors[8] = oldLeftColors[8]
+        self.backColors[8] = oldLeftColors[2]
         
         self.rightColors[0] = oldBackColors[6]
         self.rightColors[3] = oldBackColors[7]
@@ -375,17 +375,17 @@ class Cube():
         self.frontColors[1] = oldLeftColors[5]
         self.frontColors[2] = oldLeftColors[8]
         
-        self.leftColors[2] = oldBackColors[6]
+        self.leftColors[2] = oldBackColors[8]
         self.leftColors[5] = oldBackColors[7]
-        self.leftColors[8] = oldBackColors[8]
+        self.leftColors[8] = oldBackColors[6]
         
         self.backColors[6] = oldRightColors[0]
         self.backColors[7] = oldRightColors[3]
         self.backColors[8] = oldRightColors[6]
         
-        self.rightColors[0] = oldFrontColors[0]
+        self.rightColors[0] = oldFrontColors[2]
         self.rightColors[3] = oldFrontColors[1]
-        self.rightColors[6] = oldFrontColors[2]
+        self.rightColors[6] = oldFrontColors[0]
     
     def u2(self):
         self.u()
@@ -460,6 +460,22 @@ class Cube():
     def d2(self):
         self.d()
         self.d()
+    
+    def __eq__(self, other):
+        for i in range(9):
+            if self.frontColors[i] != other.frontColors[i] and other.frontColors[i] != "x":
+                return False
+            if self.leftColors[i] != other.leftColors[i] and other.leftColors[i] != "x":
+                return False
+            if self.rightColors[i] != other.rightColors[i] and other.rightColors[i] != "x":
+                return False
+            if self.backColors[i] != other.backColors[i] and other.backColors[i] != "x":
+                return False
+            if self.topColors[i] != other.topColors[i] and other.topColors[i] != "x":
+                return False
+            if self.bottomColors[i] != other.bottomColors[i] and other.bottomColors[i] != "x":
+                return False
+        return True
     
     def scramble(self):
         possibleMoves = ["r","r'","r2","l","l'","l2","u","u'","u2","d","d'","d2","f","f'","f2","b","b'","b2"]
@@ -551,10 +567,18 @@ class Cube():
                 print("Invalid Color")
             if len(self.backColors) == 9 and len(self.leftColors) == 9 and len(self.topColors) == 9 and len(self.rightColors) == 9 and len(self.frontColors) == 9 and len(self.bottomColors) == 9:
                 break
+
+    def alg(self, alg):
+        for move in alg.split(" "):
+            self.move(move)
     
     def move(self, move):
         try:
-            self.turns[move]()
+            if move[-1] == "'":
+                getattr(self, move[0].lower() + "Prime")()
+            else:
+                getattr(self, move.strip().lower())()
+            # self.turns[move.strip().lower()]()
         except:
             if move == "scramble":
                 self.scramble()
