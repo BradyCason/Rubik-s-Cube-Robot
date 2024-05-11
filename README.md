@@ -1,8 +1,9 @@
-To use the Rubik's Cube, run the rubiks_cube_simulation file. It will use the rubiks_cube_finctions 
-file to make moves.
+# Rubik's Cube Solver
+This is the code for a Rubik's Cube Robot that I made with 3 other students at UCI. The my-own-alg folder contains code that I created that models and solves the cube. I used a breadth-first approach on my solver. It solves a the cube using the CFOP Method. It takes about 90 seconds to run and solves in an average of 50 moves.
 
-The rubiks_cube_solution_finder file is not complete. I was going to make it find a 
-solution using the beginner method, but I never finished it.
+The efficient-solve folder contains code that is optimized. I created a UI using tkinter, and I used the twophase library to solve the cube in 21 moves or less in less than 0.5 seconds. Additionally, I set up the solver to output code that I copy into the arduino file. The Arduino file controls the motors in the robot, and solves the physical cube.
 
-Be careful using the rubiks_cube_solver file. It was intended to find the optimal solution, but it
-just bruteforces the simulation and never finishes unless the solution is very short.
+While, I did not model the physical robot, I assisted in design brainstorming, and I was in charge of the circuitry.
+
+# Robot Design Video
+[put video link here]

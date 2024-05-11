@@ -318,7 +318,7 @@ if __name__ == "__main__":
     
     start = time.perf_counter()
     cube = Cube()
-    cube.alg("F' D2 U2 B2 D2 R' L2 F2 D' F D2 R F2 R' F U2 L' U2 F L2 D' U2 R' L' D2")
+    cube.alg("U' L2 D' F2 U2 F2 U R2 U2 B2 L2 U2 F' U' R2 U L B2 L B' U2")
     originalCube = copy.deepcopy(cube)
     crossCube = Cube(front=["x","x","x","x","g","x","x","g","x"],
                      left=["x","x","x","o","o","x","x","x","x"],
