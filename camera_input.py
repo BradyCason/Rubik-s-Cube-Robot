@@ -3,32 +3,8 @@ import numpy as np
 
 class Camera_Input:
     def __init__(self):
-
-        height = 500
-        width = 500
-
-        # Define the HSV color (Hue, Saturation, Value)
-        # Hue: 0-179, Saturation: 0-255, Value: 0-255
-        hsv_color = (0.9271178,  83.41741,   254.99866)  # Green color in HSV
-
-        # Create an empty image with the defined dimensions and 3 color channels
-        hsv_image = np.zeros((height, width, 3), dtype=np.uint8)
-
-        # Fill the image with the defined HSV color
-        hsv_image[:] = hsv_color
-
-        # Convert the HSV image to BGR color space
-        bgr_image = cv2.cvtColor(hsv_image, cv2.COLOR_HSV2BGR)
-
-        # Display the image
-        cv2.imshow('Single HSV Color Image', bgr_image)
-        cv2.waitKey(0)
-        cv2.destroyAllWindows()
-
-        # self.get_images()
-        # self.get_colors()
-        # print(self.avg_color(self.get_image_from_webcam("Test"), (20,20,20,20)))
-
+        self.get_images()
+        self.get_colors()
 
     def get_images(self):
         instructions = ["White top, Green front",
@@ -119,27 +95,6 @@ class Camera_Input:
         print(self.cube)
 
     def avg_color(self, img, dim):
-        # x, y, w, h = dim
-        # rec = img[y:y+h, x:x+w]
-        # hsv_image = cv2.cvtColor(rec, cv2.COLOR_BGR2HSV)
-        # avg_hsv = cv2.mean(hsv_image)[:3] # (h, s, v)
-        # print(avg_hsv)
-
-        # lower = {"y": [21,50,50], "g": [70,50,50], "w": [0,0,140], "o": [5,50,50], "b":[90,50,50], "r1": [0,50,50], "r2": [140,50,50]}
-        # upper = {"y": [70,255,255], "g": [90,255,255], "w": [180,60,255], "o": [21,255,255], "b":[140,255,255], "r1": [5,255,255], "r2": [180,255,255]}
-
-        # for color in ["r","o","y","g","w","b"]:
-        #     if color == "r":
-        #         # Special treatment for "red" because it's hsv hue can be either high or low
-        #         if self.inside_lists(avg_hsv, lower["r1"], upper["r1"]):
-        #             return color
-        #         if self.inside_lists(avg_hsv, lower["r2"], upper["r2"]):
-        #             return color
-        #     else:
-        #         if self.inside_lists(avg_hsv, lower[color], upper[color]):
-        #             return color
-        # return "X"
-
         x, y, w, h = dim
         rec = img[y:y+h, x:x+w]
         hsv_image = cv2.cvtColor(rec, cv2.COLOR_BGR2HSV)
