@@ -10,6 +10,8 @@ class Solver:
         self.ctr_color = "W"
         self.get_cube()
 
+        print(self.cube)
+        
         # Solve Cube
         solution = sv.solve(self.cube_formatted(),19,2)
 

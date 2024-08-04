@@ -15,5 +15,7 @@ In order to solver your Rubik's Cube, run `solver.py`. It will take about 30 min
 
 After running `solver.py`, choose if you'd like to input your cube with your computer's camera or manually input the cube (using a GUI). After you input the cube, the solution will appear. If you have access to a robot, copy and paste the Arduino code that is outputed into `RubiksSolver.ino` and upload the code to your Arduino Uno.
 
+Note: You may need to mess around with the hsv ranges for each color if you want to use the camera depending on the cube's colors, the lighting, and the camera you are using.
+
 # Robot Design Video
 [put video link here]
