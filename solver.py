@@ -1,6 +1,7 @@
 import twophase.solver  as sv
 import tkinter as tk
 import re
+from camera_input import Camera_Input
 # UUUUUUUUURRRRRRRRRFFFFFFFFFDDDDDDDDDLLLLLLLLLBBBBBBBBB
 
 class Solver:
@@ -23,10 +24,34 @@ class Solver:
         num_moves = re.findall(r'[0-9]+f', solution)[-1][:-1]
         num_string = "int numMoves = " + num_moves + ";"
 
-        print("Copy the following into the Arduino Code =================================\n")
+        print("\nCopy the following into the Arduino Code =================================\n")
         print(move_string)
         print(num_string)
         print("\n==========================================================================")
+
+        root = tk.Tk()
+        root.title("Rubik's Cube Solver - Solution")
+
+        # Set the size of the window
+        root.geometry("500x250")
+
+        label = tk.Label(root, text=f"Copy the following into the Arduino Code\n==================================================")
+        label.pack(pady=20)
+
+        text_widget = tk.Text(root, height=5, width=50)
+        text_widget.pack(pady=0)
+        
+        # Insert text into the Text widget
+        text_widget.insert(tk.END, f"{move_string}\n{num_string}")
+        
+        # Make the Text widget read-only
+        text_widget.config(state=tk.DISABLED)
+
+        label = tk.Label(root, text=f"==================================================")
+        label.pack(pady=20)
+
+        # Run the main event loop
+        root.mainloop()
 
     def cube_formatted(self):
         return self.cube.replace("Y","D").replace("G","F").replace("O","L").replace("W","U")
@@ -56,8 +81,7 @@ class Solver:
         button_obj.config(bg=colors[self.ctr_color])
         self.cube = self.cube[:index] + self.ctr_color + self.cube[index + 1:]
 
-    def get_cube(self):
-
+    def manual_input(self):
         window = tk.Tk()
 
         ctr_button = tk.Button(bg="white",width=5, height=2,padx=0,pady=0,command=lambda: self.change_ctr_color(ctr_button))
@@ -186,6 +210,41 @@ class Solver:
         button9w.grid(row = 2, column = 6)
 
         window.mainloop()
+
+    def camera_input(self):
+        ci = Camera_Input()
+        self.cube = ci.cube
+
+    def get_cube(self):
+        # Create the main window
+        global root
+        root = tk.Tk()
+        root.title("Rubik's Cube Solver")
+
+        # Set the size of the window
+        root.geometry("300x200")
+
+        label = tk.Label(root, text="Please choose a method to input the cube:")
+        label.pack(pady=20)
+
+        # Create and place the first button
+        button1 = tk.Button(root, text="Camera Input", command=self.camera_input_clicked)
+        button1.pack(pady=10)
+
+        # Create and place the second button
+        button2 = tk.Button(root, text="Manual Input", command=self.manual_input_clicked)
+        button2.pack(pady=10)
+
+        # Run the main event loop
+        root.mainloop()
+
+    def camera_input_clicked(self):
+        root.destroy()
+        self.camera_input = Camera_Input()
+
+    def manual_input_clicked(self):
+        root.destroy()
+        self.manual_input()
 
 if __name__ == "__main__":
     solver = Solver()
