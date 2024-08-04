@@ -1,9 +1,5 @@
 # Rubik's Cube Solver
-<<<<<<< HEAD
 This is the code for a Rubik's Cube Robot. I created a UI using [tkinter](), and I used the [twophase]() library to solve the cube in 21 moves or less in less than 0.5 seconds. Additionally, I set up the solver to output code that I copy into the arduino file. The Arduino file controls the motors in the robot, and solves the physical cube.
-=======
-This is the code for a Rubik's Cube Robot that I made with another student at UCI. The my-own-alg folder contains code that I created that models and solves the cube. I used a breadth-first approach on my solver. It solves a the cube using the CFOP Method. It takes about 90 seconds to run and solves in an average of 50 moves.
->>>>>>> b58f197a92bda0ec832f7a7403364cfe3c14ca62
 
 # solver.py
 The `solver.py` file is the main brains of the program. It uses [tkinter]() to create a GUI to either manually input the cube or use `camera_input.py` to get input the cube. After that, it uses the [twophase]() library to find the solution to the cube and output two lines of Arduino code (C++) to paste into `RubiksSolver.ino`.
