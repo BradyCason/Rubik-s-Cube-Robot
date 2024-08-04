@@ -1,8 +1,8 @@
 # Rubik's Cube Solver
-This is the code for a Rubik's Cube Robot. I created a UI using [tkinter](), and I used the [twophase]() library to solve the cube in 21 moves or less in less than 0.5 seconds. Additionally, I set up the solver to output code that I copy into the arduino file. The Arduino file controls the motors in the robot, and solves the physical cube.
+This is the code for a Rubik's Cube Robot. I created a UI using [tkinter](https://docs.python.org/3/library/tkinter.html), and I used the [twophase](https://pypi.org/project/two-phase/) library to solve the cube in 21 moves or less in less than 0.5 seconds. Additionally, I set up the solver to output code that I copy into the arduino file. The Arduino file controls the motors in the robot, and solves the physical cube.
 
 # solver.py
-The `solver.py` file is the main brains of the program. It uses [tkinter]() to create a GUI to either manually input the cube or use `camera_input.py` to get input the cube. After that, it uses the [twophase]() library to find the solution to the cube and output two lines of Arduino code (C++) to paste into `RubiksSolver.ino`.
+The `solver.py` file is the main brains of the program. It uses [tkinter](https://docs.python.org/3/library/tkinter.html) to create a GUI to either manually input the cube or use `camera_input.py` to get input the cube. After that, it uses the [twophase](https://pypi.org/project/two-phase/) library to find the solution to the cube and output two lines of Arduino code (C++) to paste into `RubiksSolver.ino`.
 
 # camera_input.py
 The `camera_input.py` file uses cv2 to use the computer's camera to input the cube. It takes 6 images (1 for each side of the cube) and converts the colors into a string that `solver.py` can use.
